@@ -65,10 +65,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-建站" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Github Pages + Hexo搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2019/02/26/建站/" class="article-date">
-  <time datetime="2019-02-26T13:00:00.003Z" itemprop="datePublished">2019-02-26</time>
+    <a href="/2019/02/26/Github Pages + Hexo搭建个人博客/" class="article-date">
+  <time datetime="2019-02-26T13:05:14.431Z" itemprop="datePublished">2019-02-26</time>
 </a>
     
   </div>
@@ -78,16 +78,14 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="linux下-Github-Pages-hexo-搭建个人博客"><a href="#linux下-Github-Pages-hexo-搭建个人博客" class="headerlink" title="linux下 Github Pages + hexo 搭建个人博客"></a>linux下 Github Pages + hexo 搭建个人博客</h2><hr>
-<p>###前言<br>　　想搭个博客的想法已经存在很久了。笔者自认是个学习速度尚可但是忘性较大的”效率型”人才，可能两天学会了一项新技术，但是一个月不用，又和没学过差不了太多。代码亦是如此，看书全都会，没书写不来。于是在学会什么新事物后自己再做个总结归纳，强化记忆，益处无穷。之前做笔记用的是OneNote，不支持 ==markDown== 格式，而且也不方便随时随地翻阅，逼格也不够高，借此机会，使用Github Pages + Hexo 在阿里云（学生价）上搭了一个小型的个人博客，并映射到之前购买的私有域名，照着多方教程一路磕磕碰碰，总体还算顺利，也将此作为博客的开始，写下第一篇博文。</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>　　想搭个博客的想法已经存在很久了。笔者自认是个学习速度尚可但是忘性较大的”效率型”人才，可能两天学会了一项新技术，但是一个月不用，又和没学过差不了太多。代码亦是如此，看书全都会，没书写不来。于是在学会什么新事物后自己再做个总结归纳，强化记忆，益处无穷。之前做笔记用的是OneNote，不支持 ==markDown== 格式，而且也不方便随时随地翻阅，逼格也不够高，借此机会，使用Github Pages + Hexo 在阿里云（学生价）上搭了一个小型的个人博客，并映射到之前购买的私有域名，照着多方教程一路磕磕碰碰，总体还算顺利，也将此作为博客的开始，写下第一篇博文。</p>
 <hr>
 <h3 id="前期准备"><a href="#前期准备" class="headerlink" title="前期准备"></a>前期准备</h3><p>如何租赁服务器和购买域名，以及域名备案，阿里云的官网已经介绍得很详细了，而且网上也有很多教程分享，在此不再赘述。服务器设置好之后安装 <a href="https://www.cnblogs.com/kevinchou/p/5405540.html" target="_blank" rel="noopener">NodeJs和NPM</a>。</p>
 <hr>
-<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><p>####服务器安装git</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
-<p>####新建Git仓库</p>
-<ol>
+<h3 id="开始搭建"><a href="#开始搭建" class="headerlink" title="开始搭建"></a>开始搭建</h3><h4 id="服务器安装git"><a href="#服务器安装git" class="headerlink" title="服务器安装git"></a>服务器安装git</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+<h4 id="新建Git仓库"><a href="#新建Git仓库" class="headerlink" title="新建Git仓库"></a>新建Git仓库</h4><ol>
 <li>登录/注册: <a href="https://github.com/" target="_blank" rel="noopener">https://github.com/</a><br><br></li>
-<li><p>创建新仓库且 <strong>Respository name</strong> 中一定要输入：你的用户名+’.github.io’<br><img src="/assets/1.png" alt="1"></p>
+<li><p>创建新仓库且 <strong>Respository name</strong> 中一定要输入：你的用户名+’.github.io’<br><img src="assets/1.png" alt="1"></p>
 </li>
 <li><p>生成ssh key</p>
  <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd: /       #进入根目录</span><br><span class="line">mkdir: /.ssh        #创建隐藏文件夹.ssh</span><br><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure>
@@ -144,52 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/26/建站/" data-id="cjsls3uey0001rwp8vtukv179" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2019/02/26/hello-world/" class="article-date">
-  <time datetime="2019-02-26T03:32:33.485Z" itemprop="datePublished">2019-02-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/02/26/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/26/hello-world/" data-id="cjsls3uel0000rwp8iawuhfw9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/26/Github Pages + Hexo搭建个人博客/" data-id="cjslsad960000kyp80iq1a7u4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -230,11 +183,7 @@
       <ul>
         
           <li>
-            <a href="/2019/02/26/建站/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2019/02/26/hello-world/">Hello World</a>
+            <a href="/2019/02/26/Github Pages + Hexo搭建个人博客/">(no title)</a>
           </li>
         
       </ul>
