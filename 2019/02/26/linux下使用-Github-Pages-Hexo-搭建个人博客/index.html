@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/02/26/linux下使用-Github-Pages-Hexo-搭建个人博客/4.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/26/linux下使用-Github-Pages-Hexo-搭建个人博客/5.png">
 <meta property="og:image" content="http://yoursite.com/2019/02/26/linux下使用-Github-Pages-Hexo-搭建个人博客/6.png">
-<meta property="og:updated_time" content="2019-02-26T13:52:52.082Z">
+<meta property="og:updated_time" content="2019-02-26T13:59:42.385Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="linux下使用 Github Pages + Hexo 搭建个人博客">
 <meta name="twitter:description" content="前言　　想搭个博客的想法已经存在很久了。笔者自认是个学习速度尚可但是忘性较大的”效率型”人才，可能两天学会了一项新技术，但是一个月不用，又和没学过差不了太多。代码亦是如此，看书全都会，没书写不来。于是在学会什么新事物后自己再做个总结归纳，强化记忆，益处无穷。之前做笔记用的是OneNote，不支持 markDown 格式，而且也不方便随时随地翻阅，逼格也不够高，借此机会，使用Github Pages">
@@ -131,7 +131,7 @@
  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd 你的用户名.github.io</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
-<h4 id="Hexo配置"><a href="#Hexo配置" class="headerlink" title="Hexo配置"></a>Hexo配置</h4><p>Hexo搭建完成后目录下有_config.yml 文件，也就是Hexo的配置文件，打开并修改。（笔者使用Xftp6 + VS Code打开）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">title: xxx  # 博客的名字，也称站点名称</span><br><span class="line"></span><br><span class="line">author: xxx # 作者名字</span><br><span class="line"></span><br><span class="line">description: xxx # 对站点的描述，搜索引擎会抓取，可以自定义（这个还是加上比较好）</span><br><span class="line"></span><br><span class="line">language: zh-CN # 语言 简体中文</span><br><span class="line">#此值取决于themes文件夹下各主题中language文件夹内的中文文件命名</span><br><span class="line">#默认的landscape主题中language文件夹下中文为zh-CN.yml</span><br><span class="line"></span><br><span class="line">theme: landscape  # 配置主题</span><br><span class="line"></span><br><span class="line">deploy: # 部署相关配置</span><br><span class="line">    type: git # 使用 Git 提交</span><br><span class="line">    repo: https://github.com/xxx/xxx.github.io # 就是存放博客的仓库地址</span><br></pre></td></tr></table></figure></p>
+<h4 id="Hexo配置"><a href="#Hexo配置" class="headerlink" title="Hexo配置"></a>Hexo配置</h4><p>Hexo搭建完成后目录下有_config.yml 文件，也就是Hexo的配置文件，打开并修改。（笔者使用Xftp6 + VS Code打开）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">title: xxx  # 博客的名字，也称站点名称</span><br><span class="line"></span><br><span class="line">author: xxx # 作者名字</span><br><span class="line"></span><br><span class="line">description: xxx # 对站点的描述，搜索引擎会抓取，可以自定义（这个还是加上比较好）</span><br><span class="line"></span><br><span class="line">language: zh-CN # 语言 简体中文</span><br><span class="line">#此值取决于themes文件夹下各主题中language文件夹内的中文文件命名</span><br><span class="line">#默认的landscape主题中language文件夹下中文为zh-CN.yml</span><br><span class="line"></span><br><span class="line">theme: landscape  # 配置主题</span><br><span class="line"></span><br><span class="line">deploy: # 部署相关配置</span><br><span class="line">    type: git # 使用 Git 提交</span><br><span class="line">    repo: git@github.com:xxx/xxx.github.io # 就是存放博客的仓库地址</span><br></pre></td></tr></table></figure></p>
 <p>完整配置文档请前往<a href="https://hexo.io/zh-cn/docs/configuration.html" target="_blank" rel="noopener">Hexo官方文档</a></p>
 <p>至此，个人博客配置基本完成，可以尝试先在本地运行。</p>
 <ol>
@@ -159,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2019/02/26/linux下使用-Github-Pages-Hexo-搭建个人博客/" data-id="cjslu6a4e0000qpp8lfos9vdd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2019/02/26/linux下使用-Github-Pages-Hexo-搭建个人博客/" data-id="cjslu89xu0000bjp8cm4n6q6m" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Blog/">Blog</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Github-Pages/">Github Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/">Hexo</a></li></ul>
