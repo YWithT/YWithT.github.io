@@ -312,6 +312,7 @@ h6 code {
 }
 p {
   margin: 0 0 20px 0;
+  text-indent: 2em;
 }
 a,
 span.exturl {
@@ -1891,7 +1892,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #282bdf;
+  background: #f408ff;
 }
 .links-of-blogroll {
   font-size: 13px;
