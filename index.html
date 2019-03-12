@@ -395,7 +395,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-03-12 15:40:09" itemprop="dateModified" datetime="2019-03-12T15:40:09+08:00">2019-03-12</time>
+                <time title="修改时间：2019-03-12 15:50:16" itemprop="dateModified" datetime="2019-03-12T15:50:16+08:00">2019-03-12</time>
               
             
           </span>
@@ -450,6 +450,7 @@
         
           
             <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>对每个计算机专业学生而言，算法都是绕不过去的坎，本科的时候曾经对算法很好奇，也数次下决心要学好算法，往往从简单题做起，开始还开开心心觉得挺轻松，到后面难题的时候就停滞不前，最后也就知难而退。到了求职的时候，算法还是要重新捡起，所以在此对一些算法概念进行归类和总结，这是本科的时候没有做的。就像做数学题一样，碰到一道题首先要知道这题是考什么，这样才有方向。这几天正好碰到动态规划的题型，于是就从动态规划写起。</p>
+<hr>
 <h3 id="从例题说起"><a href="#从例题说起" class="headerlink" title="从例题说起"></a>从例题说起</h3><p>直接从概念说起的话显然不是那么好理解，就从一道简单的例题说起吧（例题取自LeetCode），题目描述如下所示。<br><img src="http://picbed.wzqj.top/picgo/20190312144620.png-wm" alt></p>
 <p>题目并不难，从图中两个示例可以看出2级和3级台阶时分别有2种和3种方法爬到楼顶，那么4级台阶呢？</p>
 <p>显然，对于一个新的台阶数，最后一步无非就是走一级或者走两级。</p>
@@ -470,16 +471,13 @@
 <p>进一步思考，我们需要保存每一次计算出来的值吗？<br>而且之前的计算全部都是由上往下的，从 n 到n-1、n-2, n-1到n-2、n-3，一直计算到1为止。如果我们采用从下往上计算呢？</p>
 <p>由此我们可以进一步优化算法的内存占用<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> climbStairs = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> res = caculator(n);</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">caculator</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">let</span> b = <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (n &lt; <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> n;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">        [a, b] = [b, a + b];    <span class="comment">//从下往上计算，每次保存最新的两个值</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最终，可以通过优化语法，达到下面的简洁效果<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> climbStairs = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = b = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        [a, b] = [b, a + b];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> a;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
-<p>一般来说由于从上往下的动态规划方法使用了递归，递归的时候会产生额外的开销，使用自底向上的动态规划方法要比从上往下的方法好。<br>至此，相信大家对于动态规划已经有了初步的了解，动态规划的核心就是 <strong><em>记住已经计算过的值</em></strong></p>
-<h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><blockquote>
-<p>动态规划算法是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推（或者说分治）的方式去解决。</p>
-</blockquote>
-<blockquote>
+<p>一般来说由于从上往下的动态规划方法使用了递归，递归的时候会产生额外的开销，使用自底向上的动态规划方法要比从上往下的方法好。 </p>
+<p>至此，相信大家对于动态规划已经有了初步的了解，动态规划的核心就是 <strong>记住已经计算过的解</strong>。</p>
+<hr>
+<h3 id="算法简介"><a href="#算法简介" class="headerlink" title="算法简介"></a>算法简介</h3><p>动态规划算法是通过拆分问题，定义问题状态和状态之间的关系，使得问题能够以递推（或者说分治）的方式去解决。</p>
 <p>动态规划算法的基本思想与分治法类似，也是将待求解的问题分解为若干个子问题（阶段），按顺序求解子阶段，前一子问题的解，为后一子问题的求解提供了有用的信息。在求解任一子问题时，列出各种可能的局部解，通过决策保留那些有可能达到最优的局部解，丢弃其他局部解。依次解决各子问题，最后一个子问题就是初始问题的解。</p>
-</blockquote>
-<blockquote>
 <p>由于动态规划解决的问题多数有重叠子问题这个特点，为减少重复计算，对每一个子问题只解一次，将其不同阶段的不同状态保存在一个二维数组中。</p>
-</blockquote>
+<hr>
 <h3 id="适用情况"><a href="#适用情况" class="headerlink" title="适用情况"></a>适用情况</h3><p>能采用动态规划求解的问题的一般要具有3个性质：</p>
 <ol>
 <li><p>最优化原理：如果问题的最优解所包含的子问题的解也是最优的，就称该问题具有最优子结构，即满足最优化原理。</p>
@@ -489,7 +487,13 @@
 <li><p>有重叠子问题：即子问题之间是不独立的，一个子问题在下一阶段决策中可能被多次使用到。（该性质并不是动态规划适用的必要条件，但是如果没有这条性质，动态规划算法同其他算法相比就不具备优势）</p>
 </li>
 </ol>
-<h3 id="我对动态规划算法的理解"><a href="#我对动态规划算法的理解" class="headerlink" title="我对动态规划算法的理解"></a>我对动态规划算法的理解</h3><p>上面的算法简介和适用情况摘自百度百科，第一遍看可能云里雾里，但是等到看完后面的例题再回来看就会有豁然开朗的感觉。在此我先讲讲我对动态规划算法的理解。<br>动态规划算法的核心概念就是 <strong>将问题分解成重叠子问题，找到其中的转化关系，并且记住已经求解过的答案</strong></p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上面的算法简介和适用情况摘自百度百科，第一遍看可能云里雾里，但是结合前面的例题再回来看就会有所收获。在此我说说看我对动态规划算法的理解。<br>动态规划算法的解题过程就是 <strong>将问题分解成重叠子问题，找到其中的转化关系，并且记住已经求过的子问题的解，使用子问题的解去计算母问题的解</strong>。<br>例题中的转化关系就是 <strong>f(n) = f(n-1) + f(n-2)</strong> ，找到了这个转化关系就有了计算思路，在最终的算法中我们也使用了一个数组去 <strong>记住子问题的解</strong> ，并使用 <strong>子问题的解</strong> 一级一级向上计算，直到求出 <strong>母问题的解</strong>，通过保存子问题的解从而避免了大量的重复计算，达到改善性能的效果。</p>
+<p>动态规划算法也并非完全像例题中所讲解的那么简单，还有许多复杂的应用情况，这篇文章仅作为入门文章，不再深入，若之后有需要会另写博客以作说明。</p>
+<hr>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
+<p><a href="https://blog.csdn.net/u013309870/article/details/75193592" target="_blank" rel="noopener">https://blog.csdn.net/u013309870/article/details/75193592</a><br><a href="https://baike.baidu.com/item/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/529408?fr=aladdin" target="_blank" rel="noopener">https://baike.baidu.com/item/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/529408?fr=aladdin</a><br>《算法竞赛入门经典》 —— 刘汝佳</p>
+</blockquote>
 
           
         
