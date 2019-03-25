@@ -333,6 +333,227 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/22/回溯法详解/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="我摘青橘">
+      <meta itemprop="description" content="不热爱写作的艺术家不是好程序员">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橘林">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/03/22/回溯法详解/" class="post-title-link" itemprop="url">回溯法详解</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-03-22 10:00:00" itemprop="dateCreated datePublished" datetime="2019-03-22T10:00:00+08:00">2019-03-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-25 12:39:00" itemprop="dateModified" datetime="2019-03-25T12:39:00+08:00">2019-03-25</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法/" itemprop="url" rel="index"><span itemprop="name">算法</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>[TOC]</p>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>8皇后问题在算法界可谓是大名鼎鼎，无人不知无人不晓，同时它也是我本科生涯的一道拦路虎，在《动态规划入门》一文中提到笔者曾经数次在算法上知难而退，而八皇后问题就是数难之一了。当时并没有先学方法再来做题，而是试着从做题中领悟方法，但是个人能力又不强，决心也不够坚定，被难题打击几次，也就丢在一旁，没了兴趣。这次重新捡起算法，先学方法，再来看这道8皇后问题，竟然如此简单。这也是我应该反思的问题，<strong>学习方法永远比多刷两道题更重要</strong>。</p>
+<p>在此我也建议刚接触算法的朋友， <strong>先学方法再做题</strong>，事半功倍。</p>
+<p>言归正传，下面正式介绍解决8皇后问题所用的算法，也是经典的常用算法之一，回溯法。</p>
+<hr>
+<h3 id="回溯法简介"><a href="#回溯法简介" class="headerlink" title="回溯法简介"></a>回溯法简介</h3><p>回溯法可以描述为：在包含问题的所有解的解空间树中，按照深度优先搜索的策略，从根结点出发深度探索解空间树。当探索到某一结点时，要先判断该结点是否包含问题的解，如果包含，就从该结点出发继续探索下去，如果该结点不包含问题的解，则逐层向其祖先结点回溯。（其实回溯法就是对隐式图的深度优先搜索算法）。 若用回溯法求问题的所有解时，要回溯到根，且根结点的所有可行的子树都要已被搜索遍才结束。 而若使用回溯法求任一个解时，只要搜索到问题的一个解就可以结束。</p>
+<p>这样的描述乍眼一看肯定有些晦涩，首从例题和递归枚举算法说起吧。</p>
+<hr>
+<h3 id="递归枚举算法"><a href="#递归枚举算法" class="headerlink" title="递归枚举算法"></a>递归枚举算法</h3><p>首先来看一道LeetCode上的例题</p>
+<p><img src="http://picbed.wzqj.top/picgo/20190322122748.png-wm" alt></p>
+<p>看到题目，先考虑解法。我们可以把输入的序列分成两个部分，一部分是已经使用过的数字组成的有序序列A，剩下的是未使用过的数字按从小到大排列组成的序列S。可以写出伪代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">permutation</span>(<span class="params">序列A，序列S</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(序列S为空)</span><br><span class="line">        输出序列A;</span><br><span class="line">    <span class="keyword">else</span> 依次考虑序列S中的每个元素v</span><br><span class="line">    &#123;</span><br><span class="line">        permutation(序列A的末尾+&#123;v&#125;，S-&#123;v&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>能理解伪代码的话那么写出程序代码也就不难了，在程序代码中，我们需要额外考虑的一个问题就是有哪些数字已经被使用过，使用过的数字不应被重复使用，为此，我们可以添加一个visit数组，用于进行标记。而有了visit数组后序列S就可以无需保存了，因为S可以由visit数组完全确定。<br>构造程序代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">permute</span>(<span class="params">nums</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//首先将nums从小到大排序</span></span><br><span class="line">    nums.sort(); </span><br><span class="line">    <span class="comment">//构造标记数组，若该数已被使用则标1，未使用标0  </span></span><br><span class="line">    <span class="keyword">var</span> visited = <span class="keyword">new</span> <span class="built_in">Array</span>(nums.length).fill(<span class="number">0</span>);   </span><br><span class="line">    <span class="comment">//构造结果数组</span></span><br><span class="line">    <span class="keyword">var</span> res = [];   </span><br><span class="line">     <span class="comment">//构造中间值数组，对应序列A   </span></span><br><span class="line">    <span class="keyword">var</span> curArray = []; </span><br><span class="line">    <span class="comment">//递归入口</span></span><br><span class="line">    helper(nums, visited, curArray, res);   </span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">helper</span>(<span class="params">nums, visited, curArray, res</span>) </span>&#123;</span><br><span class="line">    <span class="comment">//若数组curArray的长度等于nums数组的长度意味着所有数字已经被添加，此时将序列保存到res数组中</span></span><br><span class="line">    <span class="keyword">if</span> (curArray.length == nums.length) &#123;</span><br><span class="line">        <span class="comment">//由于js的数组特性，此时添加的必须是curArray的复制</span></span><br><span class="line">        res.push(curArray.concat());</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//依次遍历nums数组</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</span><br><span class="line">        <span class="comment">//检查nums[i]是否已经添加过，若未添加则添加</span></span><br><span class="line">        <span class="keyword">if</span> (visited[i] == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="comment">//修改nums[i]对应的visit标记，并将其添加到curArray末尾</span></span><br><span class="line">            visited[i] = <span class="number">1</span>;</span><br><span class="line">            curArray.push(nums[i]);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//继续下一步递归</span></span><br><span class="line">            helper(nums, visited, curArray, res);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//重要！这两步容易发生遗漏，遗漏则错</span></span><br><span class="line">            <span class="comment">//在对应的递归结束后修改其visit标记并将其从curArray末尾删去</span></span><br><span class="line">            visited[i] = <span class="number">0</span>;</span><br><span class="line">            curArray.splice(<span class="number">-1</span>, <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>相信看到这里，读者们对于递归枚举算法已经有了认识了。</p>
+<p><img src="http://picbed.wzqj.top/picgo/20190322133227.png-wm" alt></p>
+<p>通过这道题我们可以认识一下解答树，上图是当nums为[1,2,3,4]时的前三层解答树，解答树显示出了递归函数的调用过程。这棵树的第k(0&lt;=k&lt;=n)层的每个节点有(k-n)个子节点，所以第n层的节点都没有子节点(即为叶子)，而每个叶子对应于一个排列，共有n!个叶子。<br>由于这棵树展示的是 <strong>“从什么都没做”逐步生成完整解的过程</strong>，因此将其称为解答树。</p>
+<h3 id="回溯法例题"><a href="#回溯法例题" class="headerlink" title="回溯法例题"></a>回溯法例题</h3><p>接下来，我们做一道跟上题紧密相关的例题，在这里面我们就要首次用到回溯算法了。请看题。<br><img src="http://picbed.wzqj.top/picgo/20190322134502.png-wm" alt></p>
+<p>这道题和第一道例题相比有两个区别：</p>
+<ol>
+<li>不再需要保存所有可能的序列，只需要返回序列的总和</li>
+<li>给序列增加了筛选条件，要求 <figure class="highlight plain"><figcaption><span>% i </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">可能这里有朋友会想到直接套用第一题的代码，等到 ```curArray.length == N```之后对curArray按位验算即可，如果每一位的数字均满足```nums[i] % i ==0 || i % nums[i] == 0```的话把总数+1即可。这样当然是可以的，但是这样会多出许多不必要的计算，因为如果当第二位就不满足条件的话，我们就没有必要继续往后计算了。</span><br><span class="line"></span><br><span class="line">**因此，我们可以把生成和检查的过程有机结合起来，从而减少不必要的枚举，这也是回溯法的核心思想。**</span><br><span class="line"></span><br><span class="line">写出算法如下：</span><br><span class="line">``` javascript</span><br><span class="line">function countArrangement(N) &#123;</span><br><span class="line">    var res = [0];</span><br><span class="line">    var visited = new Array(N + 1).fill(0);</span><br><span class="line">    helper(N, visited, 1, res);</span><br><span class="line">    return res[0];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @param &#123;number&#125; N</span><br><span class="line"> * @param &#123;array&#125; visited 标记数组，用于记录数字是否被使用过</span><br><span class="line"> * @param &#123;int&#125; pos 当前下标</span><br><span class="line"> * @param &#123;array&#125; res 结果数组，在这里使用array来保存结果是为了方便引用</span><br><span class="line"> */</span><br><span class="line">function helper(N, visited, pos, res) &#123;</span><br><span class="line">    if (pos &gt; N) &#123;      </span><br><span class="line">        res[0]++;   //当一组序列确定后，结果数+1</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    for (let i = 1; i &lt;= N; ++i) &#123;</span><br><span class="line">        if (visited[i] == 0 &amp;&amp; (i % pos == 0 || pos % i == 0)) &#123;    //条件筛选</span><br><span class="line">            visited[i] = 1;    //满足条件则修改标记数组</span><br><span class="line">            helper(N, visited, pos + 1, res);   //进一步递归</span><br><span class="line">            visited[i] = 0;    //切记某一步递归结束之后应还原数据！</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>当N为4时，部分解答树如下所示</p>
+<p><img src="http://picbed.wzqj.top/picgo/20190325111048.png-wm" alt></p>
+<p>从图中可以看到，由于我们将生成和检查的过程结合了起来，当运行到图中的红色节点时，由于不满足筛选条件，算法将不会继续向下运算，而是向上回溯。这就是回溯算法。因此另一方面，<strong>我们可以将回溯法理解为搜索+剪枝</strong>。</p>
+<hr>
+<h3 id="8皇后问题"><a href="#8皇后问题" class="headerlink" title="8皇后问题"></a>8皇后问题</h3><p>接下来要讲的就是回溯法的经典问题——8皇后问题，问题描述如下：<br>在8*8的棋盘上防止8个皇后，使得它们互不攻击，每个皇后的攻击范围是同行同列和同对角线，要求找出解的总数。下图所示为一个可行解。<br><img src="http://picbed.wzqj.top/picgo/20190325112410.png-wm" alt></p>
+<p>问题分析：</p>
+<ol>
+<li>最简单的思路就是把问题转化为”从64个格子中选8个”，这是组合生成问题，根据组合数学，有 $C_{64}^{8}=4.426 \times 10^{9}$ 种方案，这不够友好</li>
+<li>经过思考不难发现以下事实：恰好每行每列各放置一个皇后，如果用C[x]表示第x行皇后的列编号，则问题被转化为全排列生成问题，而0-7的排列一共只有 $8!=40320$ 个，枚举量不会超过它</li>
+</ol>
+<p>由于N皇后问题更具有普适性，且与8皇后问题算法思想一致（代入n=8即为8皇后问题），故在此给出N皇后问题js算法如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> totalNQueens = <span class="function"><span class="keyword">function</span> (<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> res = [<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> C = [];</span><br><span class="line">    computeNQueens(n, <span class="number">0</span>, C, res);</span><br><span class="line">    <span class="keyword">return</span> res[<span class="number">0</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">computeNQueens</span>(<span class="params">n, cur, C, res</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (cur == n) &#123;    <span class="comment">//递归边界，若走到此处则说明所有皇后均不冲突，结果数+1</span></span><br><span class="line">        res[<span class="number">0</span>]++;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> flag = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">//尝试把第cur行的皇后放在第i列</span></span><br><span class="line">        C[cur] = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">let</span> j = <span class="number">0</span>; j &lt; cur; j++) &#123;</span><br><span class="line">            <span class="comment">//检查同列、主对角线和副对角线，这样写的作用在后文会说明 </span></span><br><span class="line">            <span class="keyword">if</span> (C[cur] == C[j] || cur - C[cur] == j- C[j]  || cur + C[cur] == j + C[j])   </span><br><span class="line">            &#123;</span><br><span class="line">                flag = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag)  <span class="comment">//若有效则继续向下一行递归</span></span><br><span class="line">            computeNQueens(n, cur + <span class="number">1</span>, C, res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同时这也是LeetCode 52. N皇后 II问题的题解。</p>
+<p>本题难以理解之处在于对皇后位置的筛选。在代码中我们使用语句 </p>
+<p><code>C[cur] == C[j] || C[cur] - cur == C[j] - j || C[cur] + cur == C[j] + j</code> </p>
+<p>来进行筛选，由于我们是逐行添加，所以皇后肯定不会横向攻击，因此只需要检查纵向和斜向攻击即可。</p>
+<p>条件 <code>C[cur] == C[j]</code>用来检查判断皇后(cur,C[cur])和皇后(j,C[j])是否在同一列上<br>条件<code>cur - C[cur] == j- C[j]  || cur + C[cur] == j + C[j]</code>则用来检查皇后(cur,C[cur])和皇后(j,C[j])是否在同一对角线上，原理可以用下图来说明</p>
+<p><img src="http://picbed.wzqj.top/picgo/20190325122254.png-wm" alt><img src="http://picbed.wzqj.top/picgo/20190325122910.png" alt><img src="http://picbed.wzqj.top/picgo/20190325122635.png-wm" alt></p>
+<p>至此，8皇后问题就有了一个详细的求解过程，算法其实可以进一步优化，比如使用一个二维数组直接判断当前尝试的皇后所在列和两个对角线是否已经有了其他皇后，在此我就不再继续深入了。有兴趣的同学可以尝试自己画一下4皇后或者5皇后问题的解答树，看看有哪一步往下搜索了，又有哪一步进行了回溯，加深理解。</p>
+<hr>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>阅读到此，相信各位已经对回溯算法和8皇后问题有了基本的认识。就我自己的理解，回溯算法就是将生成和检查结合在了一起，通过筛选避免了大量不必要的计算，也就是搜索+剪枝。</p>
+<p>感谢阅读！</p>
+<hr>
+<h3 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h3><blockquote>
+<p><a href="https://blog.csdn.net/weiyuefei/article/details/79316653" target="_blank" rel="noopener">https://blog.csdn.net/weiyuefei/article/details/79316653</a><br><a href="https://www.cnblogs.com/wuyuegb2312/p/3273337.html" target="_blank" rel="noopener">https://www.cnblogs.com/wuyuegb2312/p/3273337.html</a><br>《算法竞赛入门经典》——刘汝佳</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/11/动态规划入门/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -999,7 +1220,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1045,7 +1266,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">8</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
