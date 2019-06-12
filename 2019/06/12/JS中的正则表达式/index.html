@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="橘林">
 <meta property="og:description" content="前言总有一些知识是一看就会，一放就忘的，对我来说，正则表达式就是如此。学个入门不难，上手也快，不过由于我目前在工作学习中不太用到，往往看了之后过个几周也就忘了。也隔了两三个月没有更新博客了，所以趁着今天复习了一遍，写个blog，做一些总结，毕竟好记性不如烂键盘。  介绍正则表达式在不用的语言中有不用的写法，这篇文章主要介绍的是正则表达式在js中的写法和运用。不过万变不离其宗，各语言中的正则表达式的">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-12T08:19:00.029Z">
+<meta property="og:updated_time" content="2019-06-12T08:22:57.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS中的正则表达式">
 <meta name="twitter:description" content="前言总有一些知识是一看就会，一放就忘的，对我来说，正则表达式就是如此。学个入门不难，上手也快，不过由于我目前在工作学习中不太用到，往往看了之后过个几周也就忘了。也隔了两三个月没有更新博客了，所以趁着今天复习了一遍，写个blog，做一些总结，毕竟好记性不如烂键盘。  介绍正则表达式在不用的语言中有不用的写法，这篇文章主要介绍的是正则表达式在js中的写法和运用。不过万变不离其宗，各语言中的正则表达式的">
@@ -377,7 +377,7 @@
                 
               
 
-              <time title="创建时间：2019-06-12 14:00:00 / 修改时间：16:19:00" itemprop="dateCreated datePublished" datetime="2019-06-12T14:00:00+08:00">2019-06-12</time>
+              <time title="创建时间：2019-06-12 14:00:00 / 修改时间：16:22:57" itemprop="dateCreated datePublished" datetime="2019-06-12T14:00:00+08:00">2019-06-12</time>
             
 
             
@@ -623,7 +623,7 @@
 </div>
 <hr>
 <h3 id="使用括号的子字符串匹配"><a href="#使用括号的子字符串匹配" class="headerlink" title="使用括号的子字符串匹配"></a>使用括号的子字符串匹配</h3><p>一个正则表达式模式使用括号，将导致相应的子匹配被记住。例如，/a(b)c /可以匹配字符串“abc”，并且记得“b”。</p>
-<p>例如模式/(foo) (bar) \1 \2/中的 ‘(foo)’ 和 ‘(bar)’ 匹配并记住字符串 “foo bar foo bar” 中前两个单词。模式中的 \1 和 \2 匹配字符串的后两个单词。注意 \1、\2、…、\n 这种写法是用在正则表达式的匹配环节。而在正则表达式的替换环节，则要使用像 $1、$2、…、$n 这样的语法，代码如下所示</p>
+<p>例如模式/(foo) (bar) \1 \2/中的 ‘(foo)’ 和 ‘(bar)’ 匹配并记住字符串 “foo bar foo bar” 中前两个单词。模式中的 \1 和 \2 匹配字符串的后两个单词。注意 \1、\2、…、\n 这种写法是用在正则表达式的匹配环节。而在正则表达式的替换环节，则要使用像 &#36;1、&#36;2、…、&#36;n 这样的语法，代码如下所示</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> re = <span class="regexp">/(\w+)\s(\w+)/</span>;</span><br><span class="line"><span class="keyword">var</span> str = <span class="string">"John Smith"</span>;</span><br><span class="line"><span class="keyword">var</span> newstr = str.replace(re, <span class="string">"$2, $1"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newstr);</span><br></pre></td></tr></table></figure>
 <p>这个表达式输出 “Smith, John”。</p>
 <hr>
